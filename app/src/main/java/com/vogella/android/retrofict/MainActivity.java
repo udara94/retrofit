@@ -1,11 +1,14 @@
 package com.vogella.android.retrofict;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.vogella.android.retrofict.Adapter.CustomAdapter;
@@ -24,10 +27,13 @@ public class MainActivity extends AppCompatActivity {
     private CustomAdapter adapter;
     private RecyclerView recyclerView;
     ProgressDialog progressDoalog;
+    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fab = findViewById(R.id.fab);
 
         progressDoalog = new ProgressDialog(MainActivity.this);
         progressDoalog.setMessage("Loading....");
@@ -47,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<RetroPhoto>> call, Throwable t) {
                 progressDoalog.dismiss();
                 Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this, "clecked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                startActivity(intent);
             }
         });
     }
