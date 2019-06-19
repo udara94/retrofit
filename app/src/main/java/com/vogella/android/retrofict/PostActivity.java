@@ -61,7 +61,7 @@ public class PostActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()) {
                     showResponse(response.body().toString());
-                    Log.i("TAG", "post submitted to API." + response.body().toString());
+                    Log.i("TAG", "post submitted to API." + response.body().getBody());
                 }
             }
 
